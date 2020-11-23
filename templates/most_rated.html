@@ -79,15 +79,19 @@
         </tbody>
     </table>
 
+    {% for page in pagination_list %}
+        <a href="{{ page[0] }}">{{ page[1] }}</a>
+    {% endfor %}
 
-    {% if current_page > 1 %}
+    {#
+        {% if current_page > 1 %}
         <a href="/shows/most-rated/{{current_page-1}}/{{ orderby }}/{{ order }}" style="text-decoration:none"> < </a>
     {% else %}
-        <a href="/shows/most-rated/{{ current_page }}/{{ orderby }}/{{ order }}" style="text-decoration:none"> < </a>
+    <a href="/shows/most-rated/{{ current_page }}/{{ orderby }}/{{ order }}" style="text-decoration:none"> < </a>
     {% endif %}
 
     {% if current_page < (total / 15) - 8 %}
-        <a href="{{  url_for('most_rated', page = current_page, orderby=orderby, order=order)}}" style="text-decoration:none"> {{ current_page }} </a>
+    <a href="{{  url_for('most_rated', page = current_page, orderby=orderby, order=order)}}" style="text-decoration:none"> {{ current_page }} </a>
         <a href="/shows/most-rated/{{ current_page + 1}}/{{ orderby }}/{{ order }}" style="text-decoration:none"> {{ current_page + 1 }} </a>
         <a href="/shows/most-rated/{{ current_page + 2}}/{{ orderby }}/{{ order }}" style="text-decoration:none"> {{ current_page + 2 }} </a>
         <a href="/shows/most-rated/{{ current_page + 3 }}/{{ orderby }}/{{ order }}" style="text-decoration:none"> {{ current_page + 3 }} </a>
@@ -95,16 +99,17 @@
         ...
         <a href="/shows/most-rated/{{ current_page + 8}}/{{ orderby }}/{{ order }}" style="text-decoration:none"> {{current_page + 8}} </a>
     {% elif current_page <= (total / 15) | round | int %}
-        ...
-        <a href="/shows/most-rated/{{ current_page - 1 }}/{{ orderby }}/{{ order }}" style="text-decoration:none"> {{ current_page - 1}} </a>
-        <a href="/shows/most-rated/{{ current_page}}/{{ orderby }}/{{ order }}" style="text-decoration:none"> {{ current_page }} </a>
+    ...
+    <a href="/shows/most-rated/{{ current_page - 1 }}/{{ orderby }}/{{ order }}" style="text-decoration:none"> {{ current_page - 1}} </a>
+    <a href="/shows/most-rated/{{ current_page}}/{{ orderby }}/{{ order }}" style="text-decoration:none"> {{ current_page }} </a>
     {% endif %}
-
+    
     {% if current_page < (total / 15) | round  - 1%}
-       <a href="/shows/most-rated/{{current_page + 1}}/{{ orderby }}/{{ order }}" style="text-decoration:none"> > </a>
+    <a href="/shows/most-rated/{{current_page + 1}}/{{ orderby }}/{{ order }}" style="text-decoration:none"> > </a>
     {% else %}
-        <a href="/shows/most-rated/{{ current_page }}/{{ orderby }}/{{ order }}" style="text-decoration:none"> > </a>
+    <a href="/shows/most-rated/{{ current_page }}/{{ orderby }}/{{ order }}" style="text-decoration:none"> > </a>
     {% endif %}
-
+    #}
+    
 </body>
 </html>
