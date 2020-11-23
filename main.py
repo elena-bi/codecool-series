@@ -10,7 +10,6 @@ from math import ceil
 app = Flask('codecool_series')
 
 
-
 @app.route('/')
 def index():
     shows = queries.get_shows()
@@ -21,17 +20,28 @@ def index():
 def design():
     return render_template('design.html')
 
+
 @app.route('/shows/most-rated')
 @app.route('/shows/most-rated/<page>')
 @app.route('/shows/most-rated/<page>/<orderby>/<order>')
 def most_rated(orderby='rating', page=1, order='desc'):
-    most_rated_shows = queries.most_ratedShows(orderby, page, order)
+    most_rated_shows = queries.most_ratedShows(
+        orderby=orderby,
+        page=page,
+        order=order
+    )
 
     count_shows = queries.count_shows()
     count_shows = [row['count'] for row in count_shows][0]
     total = ceil(int(count_shows)/15)
-    return render_template('most_rated.html', shows=most_rated_shows, current_page=int(page), total = total,
-                           orderby=orderby, order=order )
+    return render_template(
+        'most_rated.html',
+        shows=most_rated_shows,
+        current_page=int(page),
+        total=total,
+        orderby=orderby,
+        order=order
+    )
 
 
 @app.route("/show/<id>")
@@ -42,9 +52,6 @@ def show_details(id):
 
     seasons = queries.get_seasons(id)
     return render_template('show_details.html', shows=show_details, actors=show_actors, seasons=seasons)
-
-
-
 
 
 def main():
