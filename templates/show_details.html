@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% for show in shows %}
+    <title>{{ show.title}}</title>
+    {% endfor %}
+        <!-- Import Montserrat font -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+
+    <!-- Normalize.css fixes lot of differences between browsers default styles -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css"/>
+
+    <!-- project wide styling -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/site.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/header.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/footer.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/background.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/button.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/card.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/table.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/form.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/grid.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/utils.css') }}">
+
+    <!-- page specific styling -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/detailed-view.css') }}">
+</head>
+<body>
+<div id="body-wrapper">
+    <header class="clearfix">
+        <img id="header-logo" src="{{ url_for('static', filename='assets/codecool-logo.png') }}" alt="Codecool Logo">
+        <span id="header-title" class="title">
+                    Codecool Series DB
+                </span>
+        <div id="header-auth">
+            <button type="button" id="bt-register">Register</button>
+            <button type="button" id="bt-login">Login</button>
+        </div>
+    </header>
+<section>
+<div class="card detailed-view">
+    {% for show in shows %}
+    <div class="row">
+
+        <div id="player" class="detailed-view. trailer">
+        {% if show.trailer != None %}
+            <script>
+            videoId = "{{ show.trailer }}"
+            </script>
+        {% endif %}
+            <script src="../static/js/embed-youtube.js"></script>
+        </div>
+
+        <div class="col col-twothird">
+
+            <h2>{{ show.title }}</h2>
+            <p class="small grayed">
+                {% if show.hours != 0 %}
+                    {{ show.hours}} h
+                {% endif %}
+                {% if show.minutes != 0 %}
+                    {{ show.minutes }} min
+                {% endif %}
+
+                <span class="separator">|</span> {{ show.genre }} <span
+                    class="separator">|</span> {{ show.release_year}} <span class="separator">|</span> {{ show.rating }}</p>
+
+    {% endfor %}
+        </div>
+    </div>
+    <div>
+        <p><b>Stars:</b>&nbsp;
+            <a href="#">{{ actors[0] }}, </a>
+            <a href="#">{{ actors[1] }}</a>
+            {% if actors[2] in actors  %}
+            <a href="#">,{{ actors[2] }}</a>
+            {% endif %}</p>
+    </div>
+    <div class="card">
+        Seasons
+        <table>
+            <thead>
+            <tr>
+                <th></th>
+                <th>Title</th>
+                <th>Overview</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for season in seasons %}
+            <tr>
+                <td>{{ season.season }}</td>
+                <td>{{ season.title }}</td>
+                {% if season.overview != None %}
+                <td>{{ season.overview }}</td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+</section>
+<footer>
+        Copyright
+</footer>
+</div>
+
+    <div class="background">
+    <div class="dark-blue-layer"></div>
+    <div class="light-blue-layer"></div>
+    </div>
+</body>
+</html>

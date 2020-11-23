@@ -1,10 +1,11 @@
-from data_manager import get_connection_data, establish_connection
+from data.data_manager import get_connection_data, establish_connection
 import os
 
 
 def init_db():
-    init_conn = get_connection_data('postgres')
-    db_name = os.environ.get('MY_PSQL_DBNAME')
+    init_conn = get_connection_data('codecool-series')
+    init_conn = {'dbname': 'codecool-series', 'user': 'postgres', 'host': 'localhost', 'password': 'test'}
+    db_name = os.environ.get('codecool-series')
 
     with establish_connection(connection_data=init_conn) as conn:
         with conn.cursor() as cursor:

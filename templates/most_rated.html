@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Most rated shows</title>
+        <!-- Import Montserrat font -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+
+    <!-- Normalize.css fixes lot of differences between browsers default styles -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css"/>
+
+    <!-- project wide styling -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/site.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/header.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/footer.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/background.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/button.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/card.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/table.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/form.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/grid.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/utils.css') }}">
+
+    <!-- page specific styling -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/detailed-view.css') }}">
+</head>
+<body>
+<div id="container">
+<div id="mostrated-shows">
+    <table>
+        <thead>
+        <th> Title <a href="{{ url_for('most_rated', page = current_page, orderby='title', order='asc')}}" style="text-decoration:none">⇧</a> <a href="{{ url_for('most_rated', page = current_page, orderby='title',order = 'desc') }}" style="text-decoration:none">⇩</a></th>
+        <th>Year<a href="{{ url_for('most_rated', page = current_page, orderby='release_year', order='asc')}}" style="text-decoration:none">⇧</a> <a href="{{ url_for('most_rated', page = current_page, orderby='release_year',order = 'desc') }}" style="text-decoration:none">⇩</a></th>
+        <th>Runtime (min)<a href="{{ url_for('most_rated', page = current_page, orderby='runtime', order='asc')}}" style="text-decoration:none">⇧</a> <a href="{{ url_for('most_rated', page = current_page, orderby='runtime',order = 'desc') }}" style="text-decoration:none">⇩</a></th>
+        <th>Rating <a href="{{ url_for('most_rated', page = current_page, orderby='rating', order='asc')}}" style="text-decoration:none">⇧</a> <a href="{{ url_for('most_rated', page = current_page, orderby='rating',order = 'desc') }}" style="text-decoration:none">⇩</a></th>
+        <th>Genres </th>
+        <th>Trailes </th>
+        <th>Homepage </th>
+        </thead>
+        <tbody>
+            {% for show in shows %}
+        <tr>
+        <td>
+            {{ show.title }}
+        </td>
+        <td>
+            {{ show.release_year }}
+        </td>
+        <td>
+            {{ show.runtime }}
+        </td>
+        <td>
+            {{ show.rating }}
+        </td>
+        <td>
+            {{ show.genre }}
+        </td>
+        <td>
+            {% if show.trailer == None %}
+                {{ 'No URL' }}
+            {% else %}
+                <a href="{{ show.trailer }}">
+                {{ show.trailer }}
+            {% endif %}
+        </a></td>
+        <td>
+            {% if show.homepage == None %}
+                {{ 'No URL' }}
+            {% else %}
+                <a href="{{ show.homepage}}">
+                {{ show.homepage }}
+            {% endif %}
+        </a>
+        </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+    {% if current_page > 1 %}
+        <a href="/shows/most-rated/{{current_page-1}}/{{ orderby }}/{{ order }}" style="text-decoration:none"> < </a>
+    {% else %}
+        <a href="/shows/most-rated/{{ current_page }}/{{ orderby }}/{{ order }}" style="text-decoration:none"> < </a>
+    {% endif %}
+
+    {% if current_page < (total / 15) - 8 %}
+        <a href="{{  url_for('most_rated', page = current_page, orderby=orderby, order=order)}}" style="text-decoration:none"> {{ current_page }} </a>
+        <a href="/shows/most-rated/{{ current_page + 1}}/{{ orderby }}/{{ order }}" style="text-decoration:none"> {{ current_page + 1 }} </a>
+        <a href="/shows/most-rated/{{ current_page + 2}}/{{ orderby }}/{{ order }}" style="text-decoration:none"> {{ current_page + 2 }} </a>
+        <a href="/shows/most-rated/{{ current_page + 3 }}/{{ orderby }}/{{ order }}" style="text-decoration:none"> {{ current_page + 3 }} </a>
+        <a href="/shows/most-rated/{{ current_page + 4}}/{{ orderby }}/{{ order }}" style="text-decoration:none"> {{current_page + 4}} </a>
+        ...
+        <a href="/shows/most-rated/{{ current_page + 8}}/{{ orderby }}/{{ order }}" style="text-decoration:none"> {{current_page + 8}} </a>
+    {% elif current_page <= (total / 15) | round | int %}
+        ...
+        <a href="/shows/most-rated/{{ current_page - 1 }}/{{ orderby }}/{{ order }}" style="text-decoration:none"> {{ current_page - 1}} </a>
+        <a href="/shows/most-rated/{{ current_page}}/{{ orderby }}/{{ order }}" style="text-decoration:none"> {{ current_page }} </a>
+    {% endif %}
+
+    {% if current_page < (total / 15) | round  - 1%}
+       <a href="/shows/most-rated/{{current_page + 1}}/{{ orderby }}/{{ order }}" style="text-decoration:none"> > </a>
+    {% else %}
+        <a href="/shows/most-rated/{{ current_page }}/{{ orderby }}/{{ order }}" style="text-decoration:none"> > </a>
+    {% endif %}
+
+</body>
+</html>

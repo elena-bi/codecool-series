@@ -1,11 +1,11 @@
 import datetime
 import os
 import sys
-
+import data.init_db
 import requests
 from psycopg2 import DataError
 
-import init_db
+# from init_db import init_db, create_schema
 from data_manager import execute_select, execute_dml_statement
 
 headers = {
@@ -22,8 +22,8 @@ def main():
     print("The program can try connecting to the TRAKT API to download data or use local data to insert instead (faster)?")
     answer = input("Do you want to connect to the TRAKT API? (y/n) ")
 
-    init_db.init_db()
-    init_db.create_schema()
+    data.init_db.init_db()
+    # create_schema()
     if answer.lower() == "y":
         insert_genres()
         insert_shows(limit=20, max_show_count=100)
