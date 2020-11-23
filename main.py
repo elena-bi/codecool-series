@@ -34,7 +34,7 @@ def most_rated(orderby='rating', page=1, order='desc'):
     count_shows = queries.count_shows()
     count_shows = [row['count'] for row in count_shows][0]
     total = ceil(int(count_shows) / 15)
-    
+
     pagination_list = [
         max(0, page - 2),
         max(0, page - 1),
@@ -43,8 +43,11 @@ def most_rated(orderby='rating', page=1, order='desc'):
         min(page + 2, total)
     ]
 
-    pagination_list = [x for i, x in enumerate(pagination_list) if x > 0 and x not in pagination_list[:i]]
-    pagination_list = [( url_for("most_rated", orderby=orderby, page=x, order=order), x ) for x in pagination_list]
+    pagination_list = [x for i, x in enumerate(
+        pagination_list) if x > 0 and x not in pagination_list[:i]]
+    pagination_list = [(url_for("most_rated", orderby=orderby,
+                                page=x, order=order), x) for x in pagination_list]
+    # hello, please delete me
 
     return render_template(
         'most_rated.html',
