@@ -40,3 +40,9 @@ function onPlayerStateChange(event) {
 function stopVideo() {
   player.stopVideo();
 }
+
+
+function addText() {
+  let cell = get
+
+}

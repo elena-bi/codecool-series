@@ -61,11 +61,11 @@ def show_details(cursor: RealDictCursor, id):
 @database_common.connection_handler
 def get_actors(cursor: RealDictCursor, id):
     query=f"""
-    select show_characters.show_id, string_agg(actors.name::text, ', ') as actors from actors
+    select show_characters.show_id, actors.name from actors
     join show_characters on
     show_characters.actor_id = actors.id
     where show_characters.show_id = {id}
-    group by show_characters.show_id
+    group by show_characters.show_id, actors.name
     """
     cursor.execute(query)
     return cursor.fetchall()
@@ -78,6 +78,32 @@ def get_seasons(cursor: RealDictCursor, id):
     on shows.id = seasons.show_id
     where show_id = {id};
 """
+    cursor.execute(query)
+    return cursor.fetchall()
+
+@database_common.connection_handler
+def get_bestshows(cursor: RealDictCursor):
+    query="""select title, id from shows
+    order by rating desc limit 10"""
+    cursor.execute(query)
+    return cursor.fetchall()
+
+@database_common.connection_handler
+def get_genres(cursor: RealDictCursor):
+    query="""
+    select name, id from genres;
+    """
+    cursor.execute(query)
+    return cursor.fetchall()
+
+@database_common.connection_handler
+def get_showByGenre(cursor: RealDictCursor, id):
+    query=f"""
+    select show_genres.genre_id, string_agg(shows.title::text, ', ') as title from show_genres
+    join shows on
+    show_genres.show_id = shows.id
+    where show_genres.genre_id = {id}
+    group by show_genres.genre_id"""
     cursor.execute(query)
     return cursor.fetchall()
 # def establish_connection(connection_data=None):

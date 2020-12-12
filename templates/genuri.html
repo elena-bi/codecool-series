@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Genuri</title>
+</head>
+<body>
+<p> Genres: </p>
+<ul>
+    {% for genre in genres %}
+    <li><a href="/genuri/{{ genre.id }}">{{ genre.name }}</a></li>
+    {% endfor %}
+</ul>
+</body>
+</html>

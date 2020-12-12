@@ -21,3 +21,14 @@ def actors(id):
 
 def seasons(id):
     return data_manager.get_seasons(id)
+
+def get_bestshows():
+    return data_manager.get_bestshows()
+
+def get_genres():
+    return data_manager.get_genres()
+
+def get_showByGenre(id):
+    return data_manager.get_showByGenre(id)
+
+print(get_showByGenre(8))

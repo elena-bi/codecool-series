@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>10 Best Shows</title>
+</head>
+<body>
+<div>
+
+        <ul>    {% for show in shows%}
+
+            <li><p>{{ show.title }}</p>
+                <ul>
+                    {% for actor in actors[loop.index0] %}
+                              <li> {{ actor.name }} </li>
+
+                        {% endfor %}
+                </ul></li>
+                {% endfor %}    </ul>
+
+
+</div>
+</body>
+</html>
