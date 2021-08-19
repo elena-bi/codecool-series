@@ -1,0 +1,20 @@
+{
+  "name": "codecool-series-python-elena-bi",
+  "version": "1.0.0",
+  "description": "## Story",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CodecoolGlobal/codecool-series-python-elena-bi.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CodecoolGlobal/codecool-series-python-elena-bi/issues"
+  },
+  "homepage": "https://github.com/CodecoolGlobal/codecool-series-python-elena-bi#readme"
+}
