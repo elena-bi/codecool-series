@@ -2,7 +2,7 @@
 # Codecool series
 
 ## About
-The idea of this project is to have a website that can let you search and access any movie or tv show you want. There has been created a "landing page" that displays information about the shows, the cast of the show and other informations.
+The idea of this project is to have a website that can let you search and access any movie or tv show you want. There has been created a "landing page" that displays information about the shows, links to the trailer and (if applicabale) the number of seasons (plus descriprions).
 
 ## Technologies used
 * Python 
