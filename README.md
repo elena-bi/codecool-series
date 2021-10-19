@@ -13,6 +13,13 @@ marketing team, there is also a database that is ready (thanks to
 [trakt.tv](https://trakt.tv/)), you "only" have to connect the dots and present
 the data in a digestable way.
 
+## Technologies used
+* Python 
+* Javascript 
+* CSS, HTML, Bootstrap 
+* Postgresql
+
+
 ## Features/ Overview
 
 ### Landing Page
